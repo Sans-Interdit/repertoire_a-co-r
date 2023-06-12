@@ -1,3 +1,6 @@
+/**
+ * Ajoute une ligne au tableau composé des informlations renseignés ou envoi une alerte si il y a un manque d'informations
+ */
 function addContact() {
   let list = [document.getElementById("firstName"),document.getElementById("lastName"),document.getElementById("phone")];
   if (list[0].value==""||list[1].value==""||list[2].value=="") {
