@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title>Répertoire A.CO.R</title>
+    <link rel="icon" type="images/x-icon" href="favicon/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 
@@ -16,7 +16,7 @@
       <br>
       <input type="tel" id="phone" placeholder="Numéro de téléphone">
       <br>
-      <button onclick=addContact() id="addButton">
+      <button onclick="addContact(takeInputInformations(['firstName', 'lastName', 'phone']))" id="addButton">
         <b>+ Ajoutez un contact</b>
       </button>
       <table id="tab">
@@ -30,5 +30,4 @@
     </div>
     <script type="text/javascript" src="app.js"></script>
   </body>
-
 </html>
