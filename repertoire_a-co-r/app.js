@@ -1,25 +1,42 @@
 /**
- * Ajoute une ligne au tableau composé des informlations renseignés ou envoi une alerte si il y a un manque d'informations
+ * Renvoie et réinitialise des valeurs d'inputs ou alerte d'un manque de données
+ * @param {Array} Ids des inputs
+ * @return {Array} Valeurs des inputs ou vide si incomplet
  */
-function addContact() {
-  let listInfo = [document.getElementById("firstName"), document.getElementById("lastName"), document.getElementById("phone")];
-  if (listInfo[0].value == "" || listInfo[1].value == "" || listInfo[2].value == "") { // Verification de la présence des informations
-    alert("Merci de renseigner tous les éléments");
-  } else {
-    var refTable = document.getElementById("tab");
-    var newLine = refTable.insertRow(refTable.rows.length);
-    for (let pas = 0; pas < 3; pas++) {  // Ajout des cellules d'informations
-      var newCell = newLine.insertCell(pas);
-      newCell.appendChild(document.createTextNode(listInfo[pas].value));
-      listInfo[pas].value = "";
+function takeInputInformations(inputIdList) {
+  let listValue = [];
+  for (const id of inputIdList) {
+    let ref = document.getElementById(id);
+    if (ref.value == "") {
+      alert("Merci de renseigner tous les éléments");
+      return [];
+    } else {
+      listValue.push(ref.value);
+      ref.value = "";
     }
-    var supprButton = document.createElement("button");
+  }
+  return listValue;
+}
+
+/**
+ * Ajoute une ligne d'informations au tableau
+ * @param {Array} Valeurs des cellules de la nouvelle ligne
+ */
+function addContact(valList) {
+  let refTable = document.getElementById("tab");
+  let newLine = refTable.insertRow(refTable.rows.length);
+  for (const e of valList) { // Ajout des cellules d'informations
+    let newCell = newLine.insertCell();
+    newCell.appendChild(document.createTextNode(e));
+  }
+  if (newLine.cells.length != 0) {
+    let newCell = newLine.insertCell(3);
+    let supprButton = document.createElement("button");
     supprButton.onclick = function() {
       newLine.remove()
     };
-    var binImg = document.createElement("img");
-    binImg.src = "https://cdn-icons-png.flaticon.com/512/1214/1214428.png?w=740&t=st=1686419059~exp=1686419659~hmac=bfbbf61f4e75265c289be3224cba94458f449b657aa0cdef95e6eac833f29ed8";
-    var newCell = newLine.insertCell(3);
+    let binImg = document.createElement("img");
+    binImg.src = "https://cdn.iconscout.com/icon/free/png-256/free-recycle-272-475059.png";
     supprButton.appendChild(binImg);
     newCell.appendChild(supprButton);
   }
